@@ -1,0 +1,44 @@
+﻿@model IEnumerable<EventEase3.Models.Venue>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="title-text">Available Venues</h1>
+<div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mb-3">
+    <div>
+        <a asp-action="Create" class="btn" style="background-color: orange">Add Venue</a>
+    </div>
+    <form asp-action="Index" method="get" class="d-flex align-items-center">
+        <input type="text" name="searchString" class="form-control me-2" placeholder="Enter Venue Name" style="width: 250px;" value="@(ViewData["CurrentSearch"] ??"")" />
+        <select name="availabilityFilter" class="form-select" style="width: 125px;">
+            <option value="" selected="@(ViewData["CurrentAvailabilityFilter"] == null ? "selected" : null)">All</option>
+            <option value="true" selected="@(ViewData["CurrentAvailabilityFilter"]?.ToString() == "True" ? "selected" : null)">Available</option>
+            <option value="false" selected="@(ViewData["CurrentAvailabilityFilter"]?.ToString() == "False" ? "selected" : null)">Unavailble</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm text-center">
+                    <img src="@item.VenueImgURL" class="card-img-top img-fluid rounded" alt="@item.VenueName" />
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>@item.VenueName</strong></h5>
+                        <p class="card-text"><strong>Location: </strong> @item.VenueLocal</p>
+                        <p class="card-text"><strong>Capacity: </strong> @item.VenueCap</p>
+                        <p class="card-text"><strong>Available: </strong> @(item.Availability ? "Yes" : "No")</p>
+                        <a asp-action="Details" asp-route-id="@item.VenueId" class="btn btn-success">Details</a> |
+                        <a asp-action="Edit" asp-route-id="@item.VenueId" class="btn btn-primary">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.VenueId" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@model EventEase3.Models.Venue
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Venue</h4>
+<hr />
+<div class="center-container">
+    <div class="form-box">
+        <h4 class="text-center">Edit Venue</h4>
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="p-3">
+            <input type="hidden" asp-for="VenueId" />
+            <input type="hidden" asp-for="VenueImgURL" />
+
+            @if (!string.IsNullOrEmpty(Model.VenueImgURL))
+            {
+                <div class="mb-3">
+                    <label class="form-label">Current Image</label><br />
+                    <img src="@Model.VenueImgURL" alt="Venue Image" width="150" class="mb-2 rounded" />
+                </div>
+            }
+
+            <div class="mb-3">
+                <label class="form-label">Change Image</label>
+                <input type="file" name="imageFile" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VenueName" class="form-label">Venue Name</label>
+                <input asp-for="VenueName" class="form-control" />
+                <span asp-validation-for="VenueName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VenueLocal" class="form-label">Venue Location</label>
+                <input asp-for="VenueLocal" class="form-control" />
+                <span asp-validation-for="VenueLocal" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VenueCap" class="form-label">Venue Capacity</label>
+                <input asp-for="VenueCap" class="form-control" />
+                <span asp-validation-for="VenueCap" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="Availability" class="form-check-input" type="checkbox" />
+                <label asp-for="Availability" class="form-check-label"></label>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Save" /> |
+            <a asp-action="Index">Back to Venues</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

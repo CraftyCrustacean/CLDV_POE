@@ -1,0 +1,41 @@
+﻿@model EventEase3.Models.Venue
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="center-container">
+    <div class="form-box">
+        <h4 class="text-center">Add a Venue</h4>
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label asp-for="VenueImgURL" class="form-label">Upload Image</label>
+                <input type="file" name="imageFile" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VenueName" class="form-label"></label>
+                <input asp-for="VenueName" class="form-control" placeholder="Enter venue name" required />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VenueLocal" class="form-label"></label>
+                <input asp-for="VenueLocal" class="form-control" placeholder="Enter venue location" required />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VenueCap" class="form-label"></label>
+                <input asp-for="VenueCap" class="form-control" placeholder="Enter venue capacity" required />
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="Availability" class="form-check-input" type="checkbox" />
+                <label asp-for="Availability" class="form-check-label"></label>
+            </div>
+
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

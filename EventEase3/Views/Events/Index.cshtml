@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EventEase3.Models.Event>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="title-text">Upcoming Events</h1>
+<div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mb-3">
+    <div>
+        <a asp-action="Create" class="btn" style="background-color: orange">Add Event</a>
+    </div>
+    <form asp-action="Index" method="get" class="d-flex align-items-center">
+        <input type="text" name="searchString" class="form-control me-2" placeholder="Enter Event Name" style="width: 250px;" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<div class="container mt-4 p-4 bg-light rounded" style="max-width: 1000px">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Event Name
+                </th>
+                <th>
+                    Event Description
+                </th>
+                <th>
+                    Event Date
+                </th>
+                <th>
+                    Event Type
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventType.EventTypeName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

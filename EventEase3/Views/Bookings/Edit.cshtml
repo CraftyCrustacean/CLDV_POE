@@ -1,0 +1,44 @@
+﻿@model EventEase3.Models.Booking
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="center-container">
+    <div class="form-box">
+
+        <h4 class="text-center">Edit a Booking</h4>
+
+        <form asp-action="Edit" class="p-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookingId" />
+
+            <div class="mb-3">
+                <label asp-for="VenueId" class="form-label">Venue</label>
+                <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId">
+                    <option value="">Select a Venue</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="EventId" class="form-label">Event</label>
+                <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId">
+                    <option value="">Select an Event</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BookingDate" class="form-label">Booking Date</label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+
+            <input type="submit" value="Save" class="btn btn-primary" /> |
+            <a asp-action="Index">Back</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
